@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karabelo Thonkha — Development & Programme Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --forest:   #1C3A2F;
+    --mid:      #4A7C59;
+    --amber:    #C8922A;
+    --cream:    #F5F0E8;
+    --ink:      #1A1A1A;
+    --muted:    #6B7C74;
+    --rule:     rgba(28,58,47,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(245,240,232,0.93);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: var(--forest); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 0.78rem; font-weight: 500; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--forest); }
+  .nav-cv-btn {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.5rem 1.1rem; background: var(--forest); color: var(--cream);
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cv-btn:hover { background: var(--mid); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; background: var(--forest);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 8rem 3rem 5rem;
+  }
+  .topo-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.18; pointer-events: none; }
+  .topo-path {
+    stroke-dasharray: 2000; stroke-dashoffset: 2000;
+    animation: drawPath 4s ease forwards;
+  }
+  @keyframes drawPath { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .topo-path { animation: none; stroke-dashoffset: 0; } }
+
+  .hero-content { position: relative; z-index: 2; max-width: 780px; }
+  .hero-eyebrow { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.3rem; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.2rem); font-weight: 900; line-height: 1.0; color: var(--cream); margin-bottom: 1.1rem; }
+  .hero-name span { color: var(--amber); }
+  .hero-title { font-size: clamp(0.95rem, 1.8vw, 1.15rem); font-weight: 300; color: rgba(245,240,232,0.75); max-width: 560px; margin-bottom: 2.2rem; line-height: 1.75; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--amber); color: var(--forest);
+    padding: 0.85rem 1.8rem; font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover { background: #dda030; transform: translateY(-1px); }
+  .hero-cta-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid rgba(245,240,232,0.35); color: rgba(245,240,232,0.85);
+    padding: 0.85rem 1.8rem; font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .hero-cta-ghost:hover { border-color: var(--amber); color: var(--amber); }
+  .hero-location { margin-top: 2.8rem; font-size: 0.78rem; color: rgba(245,240,232,0.4); letter-spacing: 0.06em; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 960px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.5rem; }
+  .section-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--forest); margin-bottom: 2.5rem; line-height: 1.2; }
+
+  /* ABOUT */
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 1rem; line-height: 1.85; color: #3a3a3a; margin-bottom: 1.1rem; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+  .stat-card { background: var(--forest); padding: 1.5rem 1.3rem; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--amber); line-height: 1; }
+  .stat-label { font-size: 0.75rem; font-weight: 500; color: rgba(245,240,232,0.68); margin-top: 0.4rem; line-height: 1.4; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* EXPERIENCE */
+  #experience { background: #EEE9DF; }
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item { display: grid; grid-template-columns: 170px 1fr; gap: 2rem; padding: 2.2rem 0; border-top: 1px solid var(--rule); }
+  .timeline-item:last-child { border-bottom: 1px solid var(--rule); }
+  .timeline-date { font-size: 0.76rem; font-weight: 600; color: var(--amber); letter-spacing: 0.06em; text-transform: uppercase; padding-top: 0.1rem; }
+  .timeline-org { font-size: 0.7rem; font-weight: 500; color: var(--muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.4; }
+  .timeline-role { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--forest); margin-bottom: 0.7rem; }
+  .timeline-desc { font-size: 0.9rem; color: #444; line-height: 1.8; margin-bottom: 0.8rem; }
+  .timeline-bullets { list-style: none; margin-bottom: 0.9rem; }
+  .timeline-bullets li { font-size: 0.88rem; color: #444; line-height: 1.75; padding: 0.22rem 0 0.22rem 1.1rem; position: relative; }
+  .timeline-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--amber); font-weight: 600; }
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.22rem 0.65rem; background: rgba(28,58,47,0.09); color: var(--forest); }
+
+  /* SKILLS */
+  #skills { background: var(--cream); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .skill-group h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--amber); }
+  .skill-item { font-size: 0.88rem; color: #3a3a3a; padding: 0.38rem 0; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 0.5rem; }
+  .skill-item::before { content: ''; width: 5px; height: 5px; background: var(--mid); border-radius: 50%; flex-shrink: 0; }
+
+  /* EDUCATION */
+  #education { background: var(--forest); }
+  #education .section-heading { color: var(--cream); }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; }
+  .edu-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(245,240,232,0.12); padding: 1.8rem; transition: background 0.2s; }
+  .edu-card:hover { background: rgba(255,255,255,0.1); }
+  .edu-degree { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.3rem; line-height: 1.35; }
+  .edu-institution { font-size: 0.78rem; font-weight: 600; color: var(--amber); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.07em; }
+  .edu-detail { font-size: 0.85rem; color: rgba(245,240,232,0.58); line-height: 1.65; }
+  .edu-year { font-size: 0.7rem; font-weight: 600; color: var(--mid); margin-top: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* CONTACT */
+  #contact { background: var(--ink); }
+  #contact .section-heading { color: var(--cream); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-intro { font-size: 1rem; color: rgba(245,240,232,0.68); line-height: 1.85; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem; text-decoration: none;
+    padding: 1.1rem 1.3rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-link:hover { background: rgba(200,146,42,0.1); border-color: rgba(200,146,42,0.35); }
+  .contact-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .contact-text-wrap { display: flex; flex-direction: column; }
+  .contact-type { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); }
+  .contact-value { font-size: 0.88rem; color: rgba(245,240,232,0.78); }
+
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.07); text-align: center; padding: 1.5rem; font-size: 0.73rem; color: rgba(255,255,255,0.28); letter-spacing: 0.06em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0.9rem 1.2rem; }
+    .nav-links { gap: 0.9rem; }
+    .nav-cv-btn { display: none; }
+    section { padding: 4rem 1.3rem; }
+    .about-grid, .skills-grid, .edu-grid, .contact-layout { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    #hero { padding: 7rem 1.3rem 4rem; }
+    .hero-actions { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">K. Thonkha</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a class="nav-cv-btn" href="Karabelo_Thonkha_CV.pdf" download>↓ CV</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <svg class="topo-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#C8922A" stroke-width="1.2">
+      <path class="topo-path" d="M-50,580 Q120,540 280,560 T580,520 T860,490 T1100,510 T1300,480"/>
+      <path class="topo-path" style="animation-delay:0.3s" d="M-50,520 Q100,475 300,495 T600,455 T880,430 T1150,440 T1300,415"/>
+      <path class="topo-path" style="animation-delay:0.6s" d="M-50,455 Q80,405 320,428 T640,385 T920,365 T1200,375 T1300,350"/>
+      <path class="topo-path" style="animation-delay:0.9s" d="M-50,385 Q60,330 340,355 T680,310 T970,292 T1250,305 T1300,282"/>
+      <path class="topo-path" style="animation-delay:1.2s" d="M-50,310 Q40,250 360,278 T720,232 T1020,218 T1300,228 T1300,210"/>
+      <path class="topo-path" style="animation-delay:1.5s" d="M-50,230 Q30,165 380,198 T760,150 T1070,142 T1300,152 T1300,138"/>
+      <path class="topo-path" style="animation-delay:1.8s" d="M-50,145 Q20,78 400,115 T800,68 T1110,62 T1300,74 T1300,60"/>
+      <path class="topo-path" style="animation-delay:2.1s" d="M150,690 Q280,645 440,660 T700,622 T940,610 T1180,618"/>
+      <path class="topo-path" style="animation-delay:2.4s" d="M-20,640 Q160,600 380,618 T680,578 T960,562 T1250,572 T1300,558"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Monitoring & Data Management · Programme Support · Development Professional</div>
+    <h1 class="hero-name">Karabelo<br><span>Thonkha</span></h1>
+    <p class="hero-title">Results-driven development professional with 5+ years of experience managing compliance documentation, grant tracking systems, and programme data across IFAD and World Bank-funded portfolios in Lesotho. Proficient in Excel, Power BI, SharePoint, and Teams.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="hero-cta">Get in Touch →</a>
+      <a href="Karabelo_Thonkha_CV.pdf" download class="hero-cta-ghost">↓ Download CV</a>
+    </div>
+    <div class="hero-location">📍 Maseru, Lesotho &nbsp;·&nbsp; +266 63984842</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About</div>
+    <h2 class="section-heading">Rigorous Data Management<br>in Complex Development Environments</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a monitoring, data management, and programme support professional with over five years of experience in internationally-funded development programmes. My work centres on designing and operating structured tracking systems, maintaining rigorous records, and producing the dashboards and status reports that donor organisations and programme leadership rely on to make evidence-based decisions.</p>
+        <p>My career spans grant portfolio management under IFAD and World Bank frameworks at SADP II, data operations at VFS Global, and agribusiness management at Sylrose Hatchery — each role demanding high accuracy, disciplined version control, and the ability to coordinate information across complex, multi-stakeholder environments.</p>
+        <p>I hold an MSc in Agricultural Resource Economics (Merit) from the National University of Lesotho and a Graduate Certificate from ESMT Berlin, where I trained in Data Analytics, Power BI, Machine Learning, and Storytelling with Data — giving me both the field credibility and the technical toolkit to drive institutional data management in development contexts.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years in IFAD & World Bank programme environments</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">Institutional grants tracked across SADP II portfolio</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Data accuracy record at VFS Global records management</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">MSc</div>
+          <div class="stat-label">Agricultural Resource Economics — Graduated with Merit, NUL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career</div>
+    <h2 class="section-heading">Professional Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">Nov 2022 – Present</div>
+          <div class="timeline-org">Sylrose Hatchery<br>Thaba-Tseka, Lesotho</div>
+        </div>
+        <div>
+          <div class="timeline-role">Assistant Manager (Part-time)</div>
+          <ul class="timeline-bullets">
+            <li>Developed and maintained operational reporting systems, KPI tracking tools, and compliance documentation within a Microsoft 365 environment.</li>
+            <li>Built monitoring infrastructure to support management oversight and reporting across hatchery operations.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">M365</span><span class="tag">KPI Tracking</span><span class="tag">Operational Reporting</span><span class="tag">Compliance Docs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">Nov 2021 – Nov 2022</div>
+          <div class="timeline-org">VFS Global<br>Maseru, Lesotho</div>
+        </div>
+        <div>
+          <div class="timeline-role">Operations Officer</div>
+          <ul class="timeline-bullets">
+            <li>Maintained 100% data accuracy across high-volume records management systems, applying strict version control and data integrity standards in a multi-delegation governance environment.</li>
+            <li>Managed structured formal correspondence and reporting with government stakeholders, applying documentation standards and quality assurance frameworks directly applicable to secretariat support functions.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">Records Management</span><span class="tag">Version Control</span><span class="tag">Data Integrity</span><span class="tag">Government Correspondence</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-date">Nov 2020 – Nov 2022</div>
+          <div class="timeline-org">SADP II — World Bank / IFAD<br>Qacha's Nek, Lesotho</div>
+        </div>
+        <div>
+          <div class="timeline-role">Service Provider Consultant</div>
+          <ul class="timeline-bullets">
+            <li>Managed and maintained a structured grants tracking database in Excel covering 12+ institutional grants, recording funder requirements, submission deadlines, compliance conditions, milestone schedules, and renewal timelines.</li>
+            <li>Tracked the full cycle of programme submissions and responses, monitoring turnaround timelines and escalating delays to programme leadership.</li>
+            <li>Maintained comprehensive, version-controlled programme documentation for all reporting periods, ensuring accessibility, accuracy, and security of records for IFAD and World Bank oversight missions.</li>
+            <li>Produced quarterly narrative status reports, progress dashboards, and compliance documentation, translating programme data into evidence-based summaries for institutional funders and government partners.</li>
+            <li>Monitored implementation progress against programme resolutions and action items across multiple commodity groups, maintaining structured action trackers and flagging off-track milestones.</li>
+            <li>Coordinated information flows across programme finance, M&amp;E, and technical teams, ensuring documentation met funder standards and institutional memory was preserved across reporting cycles.</li>
+          </ul>
+          <div class="timeline-tags">
+            <span class="tag">IFAD</span><span class="tag">World Bank</span><span class="tag">Grants Tracking</span><span class="tag">Compliance</span><span class="tag">Dashboards</span><span class="tag">MEAL</span><span class="tag">Donor Reporting</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-heading">Technical Competencies</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Monitoring & Records</h3>
+        <div class="skill-item">Programme tracking systems</div>
+        <div class="skill-item">Document management & version control</div>
+        <div class="skill-item">Submission & deadline tracking</div>
+        <div class="skill-item">Action item & milestone monitoring</div>
+        <div class="skill-item">Institutional memory management</div>
+        <div class="skill-item">Status dashboards & reporting</div>
+      </div>
+      <div class="skill-group">
+        <h3>Data & Information Systems</h3>
+        <div class="skill-item">Advanced Microsoft Excel (databases, trackers, dashboards)</div>
+        <div class="skill-item">Power BI</div>
+        <div class="skill-item">SharePoint & Microsoft Teams</div>
+        <div class="skill-item">Data analytics for business</div>
+        <div class="skill-item">Storytelling with data</div>
+        <div class="skill-item">Cloud-based records management</div>
+      </div>
+      <div class="skill-group">
+        <h3>Programme & Governance</h3>
+        <div class="skill-item">MEAL frameworks</div>
+        <div class="skill-item">Budget-vs-actual analysis</div>
+        <div class="skill-item">Donor reporting (IFAD / World Bank)</div>
+        <div class="skill-item">Multi-stakeholder coordination</div>
+        <div class="skill-item">Risk & compliance monitoring</div>
+        <div class="skill-item">Formal correspondence & minute-writing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Education</div>
+    <h2 class="section-heading">Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">MSc — Agricultural Resource Economics & Agribusiness Management</div>
+        <div class="edu-institution">National University of Lesotho, Roma</div>
+        <div class="edu-detail">Graduated with Merit. Research focused on factors influencing regenerative agriculture adoption among potato farmers in Maseru District, applying econometric methods to identify education level as a key predictor.</div>
+        <div class="edu-year">Nov 2022 – Oct 2024</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BSc — Agricultural Economics</div>
+        <div class="edu-institution">National University of Lesotho, Roma</div>
+        <div class="edu-detail">Foundational training in agricultural economics, farm management, development economics, and quantitative methods.</div>
+        <div class="edu-year">Aug 2016 – Jul 2020</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Graduate Certificate — Business Administration & Management</div>
+        <div class="edu-institution">ESMT Berlin</div>
+        <div class="edu-detail">Industry Immersion Programme covering: Data Analytics for Business, Advanced Excel for Data Analytics, Power BI, Machine Learning, Storytelling with Data, Design Thinking, Marketing, Negotiation, and Leadership.</div>
+        <div class="edu-year">2026</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">Industry Immersion Program — Henkel Gamma Class</div>
+        <div class="edu-institution">iiAfrica · IIP 2026</div>
+        <div class="edu-detail">Competitively selected as a member of the Henkel Gamma Class — iiAfrica's flagship programme connecting emerging African professionals with leading industry partners across business functions.</div>
+        <div class="edu-year">2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Contact</div>
+    <h2 class="section-heading">Let's Connect</h2>
+    <div class="contact-layout">
+      <div>
+        <p class="contact-intro">I am immediately available for new professional engagements — including monitoring and data management roles, programme support positions, and development sector opportunities across Lesotho, South Africa, and the wider region. Reach out through any channel below.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:karabelothonkha9@gmail.com" class="contact-link">
+          <span class="contact-icon">✉</span>
+          <div class="contact-text-wrap">
+            <span class="contact-type">Email</span>
+            <span class="contact-value">karabelothonkha9@gmail.com</span>
+          </div>
+        </a>
+        <a href="tel:+26663984842" class="contact-link">
+          <span class="contact-icon">📞</span>
+          <div class="contact-text-wrap">
+            <span class="contact-type">Phone</span>
+            <span class="contact-value">+266 63984842</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/karabelo-thonkha" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-icon">in</span>
+          <div class="contact-text-wrap">
+            <span class="contact-type">LinkedIn</span>
+            <span class="contact-value">linkedin.com/in/karabelo-thonkha</span>
+          </div>
+        </a>
+        <a href="Karabelo_Thonkha_CV.pdf" download class="contact-link">
+          <span class="contact-icon">↓</span>
+          <div class="contact-text-wrap">
+            <span class="contact-type">Curriculum Vitae</span>
+            <span class="contact-value">Download PDF</span>
+          </div>
+        </a>
+        <div class="contact-link">
+          <span class="contact-icon">📍</span>
+          <div class="contact-text-wrap">
+            <span class="contact-type">Location</span>
+            <span class="contact-value">Maseru, Lesotho</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Karabelo Thonkha &nbsp;·&nbsp; Development & Programme Professional &nbsp;·&nbsp; Maseru, Lesotho
+</footer>
+
+</body>
+</html>
